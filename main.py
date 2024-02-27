@@ -1,10 +1,6 @@
-from utils.readFile import readFile
-from utils.textFormatting import ANSI
-from lib.player import Player, teamScore
-from lib.setup import setup
-
-import random
-import numpy as np
+from utils.textFormatting import background, style, color
+from lib.player import teamScore
+from lib.roster import getRoster
 
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -12,38 +8,8 @@ import numpy as np
 # increases, but the chance that the same teams happen every time is larger.
 shuffles = 60
 
-#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-def checkRoster(players):
-    if len(players) < 12:
-        out = ANSI.background(40) + ANSI.style(0) + ANSI.color(31) + \
-              "Insufficient number of players." + \
-              ANSI.background(40) + ANSI.style(0) + ANSI.color(37)
-        print(out)
-        return -1
-        
-    elif len(players) > 12:
-        out = ANSI.background(40) + ANSI.style(0) + ANSI.color(31) + \
-              "Too many players." + \
-              ANSI.background(40) + ANSI.style(0) + ANSI.color(37)
-        print(out)
-        return -1
-
-    return 0
-    
-#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 def sorting(file):
-    players = readFile(file)
-    if checkRoster(players) == -1: return -1
-
-    # Get weights
-    weights = setup()
-
-    # Transform the csv into a list of Player objects
-    roster = []
-    for player in players:
-        roster.append(Player(player, weights))
+    roster = getRoster(file)
 
     # Separate the teams to start
     team1 = roster[:len(roster)//2]
@@ -55,6 +21,7 @@ def sorting(file):
 
     # Keep trying to minimize the difference, and when it happens, save
     # formation
+    import random
     for i in range(shuffles):
         team1, team2 = [], []
         random.shuffle(roster)
@@ -70,36 +37,36 @@ def sorting(file):
             teams = team1.copy(), team2.copy()
         
 
-    out = ANSI.background(40) + ANSI.style(0) + ANSI.color(32) + \
+    out = background(40) + style(0) + color(32) + \
           "\nFinal formation has been found." + \
-          ANSI.background(40) + ANSI.style(0) + ANSI.color(37)
-    print(out, end='\n\n')
+          background(40) + style(0) + color(37)
+    print(out, end='\n')
 
-    print(f"The teams differ by {round(least_diff, 4)}", end='\n\n')
+    print(f"The teams differ by {round(least_diff, 4)}.", end='\n\n')
     
 
-    out = ANSI.background(46) + ANSI.style(1) + ANSI.color(37) + \
+    out = background(46) + style(1) + color(37) + \
           f"TEAM 1:\t\t{str(round(teamScore(teams[0]),4))}" + \
-          ANSI.background(40) + ANSI.style(0) + ANSI.color(37)
+          background(40) + style(0) + color(37)
     print(out, end='\n')
     for player in teams[0]:
         out = player.name + '\t\t' + \
-              ANSI.background(46) + ANSI.style(0) + ANSI.color(37) + \
+              background(46) + style(0) + color(37) + \
               str(round(player.getScore(), 4)) + \
-              ANSI.background(40) + ANSI.style(0) + ANSI.color(37)
+              background(40) + style(0) + color(37)
         print(out)
     print()
 
 
-    out = ANSI.background(46) + ANSI.style(1) + ANSI.color(37) + \
+    out = background(46) + style(1) + color(37) + \
           f"TEAM 2:\t\t{str(round(teamScore(teams[1]),4))}" + \
-          ANSI.background(40) + ANSI.style(0) + ANSI.color(37)
+          background(40) + style(0) + color(37)
     print(out, end='\n')
     for player in teams[1]:
         out = player.name + '\t\t' + \
-              ANSI.background(44) + ANSI.style(0) + ANSI.color(37) + \
+              background(44) + style(0) + color(37) + \
               str(round(player.getScore(), 4)) + \
-              ANSI.background(40) + ANSI.style(0) + ANSI.color(37)
+              background(40) + style(0) + color(37)
         print(out)
 
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

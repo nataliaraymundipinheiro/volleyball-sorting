@@ -1,16 +1,32 @@
-from utils.textFormatting import ANSI
-import numpy as np
+from utils.textFormatting import background, style, color
+
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 def error():
-    message = ANSI.background(40) + ANSI.style(0) + ANSI.color(31) + \
+    """
+    Generates a message with a red color indicating "Invalid. Try again." and
+    resets the color to white.
+
+    """
+
+    message = background(40) + style(0) + color(31) + \
               "Invalid. Try again.\n" + \
-              ANSI.background(40) + ANSI.style(0) + ANSI.color(37)
+              background(40) + style(0) + color(37)
     print(message)
 
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
 def getDesireWeight():
+    """
+    Prompts the user to input a weight for desire to play and ensures that the
+    input is a numeric value.
+    
+    Returns
+    -------
+    The weight for desire to play
+    
+    """
+
     def out():
         print("Desire to play:", end='\t\t')
     
@@ -25,6 +41,16 @@ def getDesireWeight():
 
 
 def getTechnicalWeight():
+    """
+    Prompts the user to input a weight for technical ability and ensures that
+    the input is a numeric value.
+    
+    Returns
+    -------
+    The weight for technical ability
+    
+    """
+    
     def out():
         print("Technical ability:", end='\t')
     
@@ -39,6 +65,16 @@ def getTechnicalWeight():
 
 
 def getPhysicalWeight():
+    """
+    Prompts the user to input a weight for physical ability and ensures that
+    the input is a numeric value.
+    
+    Returns
+    -------
+    The weight for physical ability
+    
+    """
+    
     def out():
         print("Physical ability:", end='\t')
 
@@ -73,13 +109,27 @@ weights are
 
 """
 
-prompt = ANSI.background(40) + ANSI.style(0) + ANSI.color(36) + \
+prompt = background(40) + style(0) + color(36) + \
          "Would you like to change these weights? [y / n]" + \
-         ANSI.background(40) + ANSI.style(0) + ANSI.color(37)
+         background(40) + style(0) + color(37)
               
 
 
 def setup():
+    """
+    Prompts the user to change weights and returns normalized weights if the
+    user chooses to change them, otherwise it returns default weights:
+
+    * Desire to play: 0.4
+    * Technical ability: 0.35
+    * Physical ability: 0.25
+    
+    Return
+    ------
+    A list of weights
+    
+    """
+
     # Print introduction text
     # This will prompt the user if they want to change the weights
     print(introduction + prompt, end='\t')
@@ -93,6 +143,8 @@ def setup():
 
     if stream == 'y':
         weights = getWeights()
+        import numpy as np
         return np.array(weights) / sum(weights)
+    
     else:
         return 0.4, 0.35, 0.25
