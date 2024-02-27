@@ -71,9 +71,13 @@ def sorting(file):
 
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-def main():
-    sorting("data/players.csv")
-
-
+def main(filename):
+    sorting(filename if filename != None else "data/example.csv")
+        
 if __name__ == "__main__":
-    main()
+    import argparse
+
+    parser = argparse.ArgumentParser(description='Filename')
+    parser.add_argument('--filename', metavar='path', required=False)
+    args = parser.parse_args()
+    main(filename=args.filename)
