@@ -10,3 +10,6 @@ a category that sometimes has to be included).
 
 The list of players will be passed as a CSV file. You can use the CSV files in
 `data` for the formatting.
+
+# How to Use
+
