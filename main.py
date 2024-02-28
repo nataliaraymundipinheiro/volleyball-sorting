@@ -8,7 +8,10 @@ from lib.roster import getRoster
 # increases, but the chance that the same teams happen every time is larger.
 shuffles = 60
 
-def sorting(file):
+def sorting(file, new_shuffles):
+    if new_shuffles != None and new_shuffles.isnumeric():
+        shuffles = int(new_shuffles)
+        
     roster = getRoster(file)
 
     # Separate the teams to start
@@ -71,13 +74,14 @@ def sorting(file):
 
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-def main(filename):
-    sorting(filename if filename != None else "data/example.csv")
+def main(filename, shuffles):
+    sorting(filename if filename != None else "data/example.csv", shuffles)
         
 if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser(description='Filename')
     parser.add_argument('--filename', metavar='path', required=False)
+    parser.add_argument('--shuffles', metavar='path', required=False)
     args = parser.parse_args()
-    main(filename=args.filename)
+    main(filename=args.filename, shuffles=args.shuffles)
