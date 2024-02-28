@@ -1,34 +1,77 @@
 # Volleyball Sorting
 
-The volleyball sorting algorithm separates two teams of players based on the
-team score. This score is given by the sum of each player's score. The idea is
-to minimize the difference in score between the two teams.
+## Project Overview
 
-The score is defined by weighted sum of three categories: technical ability, 
-physical ability, and the desire to play volleyball (yes, unfortunately, this is
-a category that sometimes has to be included).
 
-The list of players will be passed as a CSV file. You can use the CSV files in
-`data` for the formatting.
+The Volleyball Sorting algorithm is designed to create balanced teams for
+volleyball games by minimizing the difference in overall team grades. This
+innovative approach takes into account each player's technical and physical
+abilities, as well as their desire to play, to ensure fair and competitive
+matches.
+
+The algorithm processes a list of players provided in a CSV file, utilizing a
+weighted sum of three categories: technical ability, physical ability, and the
+desire to play volleyball. Our goal is to enhance the sports experience by
+ensuring each game is as enjoyable and fair as possible.
+
+
+## Installation
+
+Before you can run the Volleyball Sorting algorithm, you'll need to have Python
+3 installed on your system. If you don't have Python 3, you can download it from
+ the official website at [https://www.python.org/downloads/](https://www.python.org/downloads/).
+
+Once Python is set up, clone this repository to your local machine:
+
+```
+git clone https://github.com/nataliaraymundipinheiro/volleyball-sorting
+```
+
+### Install Required Libraries
+
+This project requires NumPy for numerical computations. To install NumPy, run
+the following command:
+
+```
+pip3 install numpy
+```
+
+Ensure that all dependencies are installed before proceeding to use the
+Volleyball Sorting algorithm.
+
 
 ## How to Use
 
-Run
+### Running with the Example File
+
+To run the Volleyball Sorting algorithm with the provided example CSV file in
+the `data` directory, simply execute:
 
 ```
 python3 main.py
 ```
 
-to run with the example file. To run with your own file of players, run
+### Using Your Own Player File
+
+To use your own file of players, ensure it's in CSV format according to the
+examples in `data` and run:
 
 ```
-python3 main.py --filename=path/to/file
+python3 main.py --filename=path/to/your/file
 ```
 
-It must be a CSV file. To change the number of shuffles (to 100, for example)
-you want to perform to the roster, run
+### Customizing Number of Shuffles
+
+The algorithm supports shuffling the roster to explore different team
+combinations. To change the default number of shuffles (to 100, for example),
+use:
 
 ```
 python3 main.py --shuffles=100
 ```
 
+## Contributing
+
+We welcome contributions to the Volleyball Sorting project. Whether you're
+looking to fix bugs, add new features, or improve documentation, please feel
+free to make a pull request.
