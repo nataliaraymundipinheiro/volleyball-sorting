@@ -11,5 +11,24 @@ a category that sometimes has to be included).
 The list of players will be passed as a CSV file. You can use the CSV files in
 `data` for the formatting.
 
-# How to Use
+## How to Use
+
+Run
+
+```
+python3 main.py
+```
+
+to run with the example file. To run with your own file of players, run
+
+```
+python3 main.py --filename=path/to/file
+```
+
+It must be a CSV file. To change the number of shuffles (to 100, for example)
+you want to perform to the roster, run
+
+```
+python3 main.py --shuffles=100
+```
 
