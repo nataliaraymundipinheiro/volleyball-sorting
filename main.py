@@ -6,9 +6,9 @@ from lib.roster import getRoster
 
 # The more you shuffle, the probability that the teams are similar in score
 # increases, but the chance that the same teams happen every time is larger.
-shuffles = 60
 
-def sorting(file, new_shuffles):
+def sorting(file, new_shuffles):  # sourcery skip: extract-duplicate-method
+    shuffles = 60
     if new_shuffles != None and new_shuffles.isnumeric():
         shuffles = int(new_shuffles)
         
@@ -25,7 +25,7 @@ def sorting(file, new_shuffles):
     # Keep trying to minimize the difference, and when it happens, save
     # formation
     import random
-    for i in range(shuffles):
+    for _ in range(shuffles):
         team1, team2 = [], []
         random.shuffle(roster)
         
